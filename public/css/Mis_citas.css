@@ -1,0 +1,159 @@
+/* Reset + fuente */
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  body {
+    background: #fff; color: #222; min-height: 100vh;
+  }
+  
+  /* HEADER (mismo estilo que Reservar) */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    min-height: 70px;
+  }
+  
+  .logo img {
+    width: 100px;
+    height: auto;
+    justify-content: space-between;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  
+  nav a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .perfil button {
+    background-color: #222;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  /* MAIN CITAS */
+  .citas-contenedor {
+    padding: 40px 20px; max-width: 1200px; margin: auto;
+  }
+  .citas-contenedor h1 {
+    text-align: center; font-size: 2rem; margin-bottom: 30px;
+  }
+  .grid-citas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    gap: 20px;
+  }
+  .cita-card {
+    background: #f9f9f9; border-radius: 10px;
+    padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+  }
+  .cita-card:hover { transform: translateY(-5px); }
+  .cita-card h3 {
+    font-size: 1.2rem; margin-bottom: 10px;
+  }
+  .cita-card p {
+    font-size: 1rem; color: #555; margin: 5px 0;
+  }
+
+  /*.cita-card .precio { /* si necesitas precio, opcional  }*/
+  .cita-card button {
+    margin-top: 15px; padding: 10px 20px;
+    background: #111; color: #fff; border: none;
+    border-radius: 6px; cursor: pointer; font-weight: bold;
+    transition: background 0.3s;
+  }
+  .cita-card button:hover { background: #000; }
+  
+  /* FOOTER  */
+  footer {
+    background-color: #f9f9f9;
+    padding: 20px 20px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .logo-footer {
+    width: 80px;
+    margin-bottom: 10px;
+  }
+  .social{
+    padding: 15px 15px;
+    justify-content: space-between;
+  }
+  .iconos img {
+    max-width: 30px;
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+ 
+  footer .links {
+    display: flex;
+    gap: 40px;
+    flex: 2 1 500px;
+  }
+  
+  footer h4 {
+    margin-bottom: 10px;
+  }
+  
+  footer ul {
+    list-style: none;
+  }
+  
+  footer ul li a {
+    text-decoration: none;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+  }
+  
+  footer ul li a:hover {
+    color: #000;
+  }
+  
+    nav ul {
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 10px 0;
+    }
+  
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column; align-items: flex-start;
+    }
+    nav ul {
+      flex-wrap: wrap; gap: 10px; margin: 10px 0;
+    }
+    .perfil { align-self: center; margin-left: 0; }
+    .citas-contenedor {
+      padding: 20px 10px;
+    }
+  }
+  

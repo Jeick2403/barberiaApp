@@ -1,0 +1,155 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.header {
+  background-color: #1f2937;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+ }
+
+.logo img {
+    height: 40px;
+    width: auto;
+  }
+
+.nav a {
+  color: white;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.dashboard {
+  display: flex;
+  min-height: calc(100vh - 120px);
+}
+
+.sidebar {
+  background-color: #ffffff;
+  padding: 2rem 1rem;
+  width: 220px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.sidebar h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin-bottom: 1rem;
+}
+
+.sidebar ul li a {
+  color: #374151;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.sidebar ul li a:hover {
+  color: #00c8a0;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+.main-content h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.main-content p {
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  font-size: 1.2rem;
+  color: #111827;
+  transition: transform 0.2s;
+}
+
+.card span {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.footer {
+  background-color: #1f2937;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .main-content {
+    padding: 1.5rem;
+  }
+}

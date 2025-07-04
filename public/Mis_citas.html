@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mis Citas - JP Systems</title>
+  <link rel="stylesheet" href="css/mis_citas.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="/Imagenes/Logo.png" alt="Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/inicioCliente.html">Inicio</a></li>
+        <li><a href="reservar.html">Reservar</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="barberos.html">Barberos</a></li>
+        <li><a href="mis_citas.html" class="activo">Mis Citas</a></li>
+        <li><a href="contacto.html">Contáctanos</a></li>
+        <li><a href="pqrs.html">PQRS</a></li>
+      </ul>
+    </nav>
+    <div class="perfil">
+      <button onclick="location.href='login.html'">Salir</button>
+    </div>
+  </header>
+
+  <!-- SECCIÓN MIS CITAS -->
+  <main class="citas-contenedor">
+    <h1>Mis Citas</h1>
+    <div class="grid-citas">
+      <!-- Ejemplo de tarjeta de cita; repite dinámicamente -->
+      <div class="cita-card">
+        <h3>Servicio: Corte de Cabello</h3>
+        <p><strong>Barbero:</strong> Diana Pérez</p>
+        <p><strong>Fecha:</strong> 15/05/2025</p>
+        <p><strong>Hora:</strong> 10:00 AM</p>
+        <button onclick="location.href='#'">Ver detalles</button>
+      </div>
+      <div class="cita-card">
+        <h3>Servicio: Barba y Estilizado</h3>
+        <p><strong>Barbero:</strong> Luis Ramírez</p>
+        <p><strong>Fecha:</strong> 20/05/2025</p>
+        <p><strong>Hora:</strong> 2:00 PM</p>
+        <button onclick="location.href='#'">Ver detalles</button>
+      </div>
+      <!-- … más tarjetas según BD … -->
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="social">
+        <img src="/Imagenes/Logo.png" alt="Logo" class="logo-footer">
+        <p>Síguenos:</p>
+        <div class="iconos">
+          <img src="/Imagenes/instagram.png">
+          <img src="/Imagenes/facebook.png">
+          <img src="/Imagenes/x.png">
+          <img src="/Imagenes/youtube.png">
+        </div>
+      </div>
+  
+      <div class="links">
+        <div>
+          <h4>Nosotros</h4>
+          <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Reservas</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Barberos</a></li>
+            <li><a href="#">Mis Citas</a></li>
+            <li><a href="#">Contáctanos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Más</h4>
+          <ul>
+            <li><a href="#">Promociones</a></li>
+            <li><a href="#">Galería</a></li>
+            <li><a href="#">Nuestra Historia</a></li>
+            <li><a href="#">Reseñas</a></li>
+            <li><a href="#">PQRS</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Prácticas</a></li>
+            <li><a href="#">Soporte</a></li>
+            <li><a href="#">Redes sociales</a></li>
+          </ul>
+        </div>
+      </div>
+  </footer>
+
+</body>
+</html>

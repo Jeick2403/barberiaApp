@@ -1,0 +1,147 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f4;
+    color: #222;
+  }
+  
+  /* Header */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    min-height: 70px;
+  }
+  
+  .logo img {
+    width: 100px;
+    height: auto;
+    justify-content: space-between;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  
+  nav a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .perfil button {
+    background-color: #222;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  /* Contenido perfil */
+  .contenedor-perfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  
+  .card-perfil {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .card-perfil .foto img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+  
+  .card-perfil h2 {
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+  }
+  
+  .card-perfil p {
+    margin: 8px 0;
+    font-size: 1rem;
+  }
+  
+  .acciones {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+  }
+  
+  .acciones button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .editar {
+    background-color: #FFD700;
+    color: #000;
+  }
+  
+  .cerrar {
+    background-color: #222;
+    color: #fff;
+  }
+  
+  .editar:hover {
+    background-color: #e6c200;
+  }
+  
+  .cerrar:hover {
+    background-color: #000;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .card-perfil {
+      padding: 30px 20px;
+    }
+  
+    .acciones {
+      flex-direction: column;
+    }
+  
+    nav ul {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  }
+  

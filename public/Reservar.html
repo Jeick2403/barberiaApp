@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservar Cita - JP Systems</title>
+  <link rel="stylesheet" href="css/reservar.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="/Imagenes/Logo.png" alt="Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/inicioCliente.html">Inicio</a></li>
+        <li><a href="/Reservar.html">Reservar</a></li>
+        <li><a href="/Servicios.html">Servicios</a></li>
+        <li><a href="/Barberos.html">Barberos</a></li>
+        <li><a href="/Mis_citas.html">Mis Citas</a></li>
+        <li><a href="/contacto.html">Contáctanos</a></li>
+        <li><a href="/pqrs.html">PQRS</a></li>
+      </ul>
+    </nav>
+    <div class="perfil">
+      <button>Salir</button>
+    </div>
+  </header>
+
+  <!-- Sección Reservar -->
+  <main class="reservar-contenedor">
+    <div class="caja-reserva">
+      <h2>Reserva tu cita</h2>
+      <form action="#" method="POST">
+        
+        <!-- Cliente (si ya logueado, oculto o prefijado) -->
+        <!-- <input type="hidden" name="id_cliente" value="123"> -->
+
+        <!-- Seleccionar servicio -->
+        <label for="servicio">Servicio</label>
+        <select id="servicio" name="servicio" required>
+          <option value="" disabled selected>Elige un servicio</option>
+          <option value="1">Corte de cabello</option>
+          <option value="2">Barba</option>
+          <option value="3">Corte + Barba</option>
+          <!-- … dinámicos desde BD … -->
+        </select>
+
+        <!-- Seleccionar barbero -->
+        <label for="barbero">Barbero</label>
+        <select id="barbero" name="barbero" required>
+          <option value="" disabled selected>Elige un barbero</option>
+          <option value="5">Diana</option>
+          <option value="7">Luis</option>
+          <option value="9">Ana</option>
+          <!-- … dinámicos desde BD … -->
+        </select>
+
+        <!-- Fecha -->
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" name="fecha" required
+               min="<?= date('Y-m-d'); ?>" />
+
+        <!-- Hora -->
+        <label for="hora">Hora</label>
+        <select id="hora" name="hora" required>
+          <option value="" disabled selected>Elige una hora</option>
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
+          <option value="11:00">11:00</option>
+          <!-- … dinámico según disponibilidad … -->
+        </select>
+
+        <button type="submit">Confirmar cita</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer común -->
+  <footer>
+    <div class="social">
+      <img src="/Imagenes/Logo.png" alt="Logo" class="logo-footer">
+      <p>Síguenos:</p>
+      <div class="iconos">
+        <img src="/Imagenes/instagram.png">
+        <img src="/Imagenes/facebook.png">
+        <img src="/Imagenes/x.png">
+        <img src="/Imagenes/youtube.png">
+      </div>
+    </div>
+
+    <div class="links">
+      <div>
+        <h4>Nosotros</h4>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Reservas</a></li>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Barberos</a></li>
+          <li><a href="#">Mis Citas</a></li>
+          <li><a href="#">Contáctanos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Más</h4>
+        <ul>
+          <li><a href="#">Promociones</a></li>
+          <li><a href="#">Galería</a></li>
+          <li><a href="#">Nuestra Historia</a></li>
+          <li><a href="#">Reseñas</a></li>
+          <li><a href="#">PQRS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Recursos</h4>
+        <ul>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Prácticas</a></li>
+          <li><a href="#">Soporte</a></li>
+          <li><a href="#">Redes sociales</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

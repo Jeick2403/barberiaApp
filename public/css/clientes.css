@@ -1,0 +1,180 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fff;
+    color: #222;
+  }
+  
+  /* Header */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    min-height: 70px;
+  }
+  
+  .logo img {
+    width: 100px;
+    height: auto;
+    justify-content: space-between;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  
+  nav a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .perfil button {
+    background-color: #222;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .bienvenida {
+    text-align: center;
+    padding: 60px 20px 20px;
+  }
+  
+  .bienvenida h1 {
+    font-size: 2.5rem;
+  }
+  
+  .bienvenida p {
+    color: #888;
+    font-size: 1rem;
+  }
+  
+  .banner img {
+    width: 100%;
+    height: 300px;
+    display: block;
+    object-fit: cover; 
+    object-position: bottom; 
+    display: block;
+  }
+  
+  .recientes {
+    padding: 40px 30px;
+  }
+  
+  .recientes h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .citas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+  }
+  
+  .cita-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #fff;
+  }
+  
+  .cita-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .cita-card p {
+    color: #666;
+  }
+  
+  .cita-card span {
+    font-size: 0.9rem;
+    color: #aaa;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #f9f9f9;
+    padding: 20px 20px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .logo-footer {
+    width: 80px;
+    margin-bottom: 10px;
+  }
+  .social{
+    padding: 15px 15px;
+    justify-content: space-between;
+  }
+  .iconos img {
+    max-width: 30px;
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+ 
+  footer .links {
+    display: flex;
+    gap: 40px;
+    flex: 2 1 500px;
+  }
+  
+  footer h4 {
+    margin-bottom: 10px;
+  }
+  
+  footer ul {
+    list-style: none;
+  }
+  
+  footer ul li a {
+    text-decoration: none;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+  }
+  
+  footer ul li a:hover {
+    color: #000;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+   }
+    nav ul {
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 10px 0;
+    }
+  
