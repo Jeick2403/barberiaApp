@@ -1,5 +1,4 @@
 <?php
-// php/guardar.php
 session_start();
 require __DIR__ . '/../config/config.php';
 
@@ -8,31 +7,27 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// 1. Recoger y sanear datos
 $email    = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
 $pass     = $_POST['password'];
 $confirm  = $_POST['confirmar'];
-$rol      = $_POST['rol']; // ← CAMBIO AQUÍ: ahora se toma el número del formulario
+$rol      = $_POST['rol'];
 $estado   = $_POST['estado'];
 
 if (!$email) {
-    die("Email no válido. <a href='../public/Registrousuarios.html'>Volver</a>");
+    die("Email no válido.");
 }
 if ($pass !== $confirm) {
-    die("Las contraseñas no coinciden. <a href='../public/Registrousuarios.html'>Volver</a>");
+    die("Las contraseñas no coinciden.");
 }
 
-// 2. Comprobar si ya existe ese email
 $stmt = $pdo->prepare("SELECT id_usuario FROM usuarios WHERE nombre_usuario = ?");
 $stmt->execute([$email]);
 if ($stmt->fetch()) {
-    die("Ese email ya está registrado. <a href='../public/Registrousuarios.html'>Volver</a>");
+    die("Ese email ya está registrado.");
 }
 
-// 3. Hashear la contraseña
 $hash = password_hash($pass, PASSWORD_DEFAULT);
 
-// 4. Insertar en la base de datos
 $sql = "INSERT INTO usuarios 
         (id_rol, nombre_usuario, fecha_registro, clave_acceso, estado)
         VALUES
@@ -45,6 +40,6 @@ $stmt->execute([
     ':estado' => $estado
 ]);
 
-// 5. Redirigir al login
-header('Location: ../public/login.html');
+// ✅ MOSTRAR MENSAJE DE ÉXITO
+echo "¡OK!";
 exit;

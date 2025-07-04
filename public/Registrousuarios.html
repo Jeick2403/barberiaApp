@@ -23,7 +23,7 @@
       <div class="caja-login">
         <h2>Crear cuenta</h2>
 
-        <form action="../php/guardar.php" method="POST">
+        <form id="formRegistro">
           <label for="nombre">Nombre completo</label>
           <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
 
@@ -74,21 +74,50 @@
     </div>
   </div>
 <!-- Modal de éxito -->
-<div id="modalExito" class="modal">
+<div id="modalExito" class="modal" style="display: none;">
   <div class="modal-contenido">
     <h2>¡Registro exitoso!</h2>
-    <p>Tu cuenta se ha creado correctamente. Puedes iniciar sesión ahora.</p>
+    <p>Tu cuenta ha sido creada correctamente. Puedes iniciar sesión ahora.</p>
     <button onclick="irALogin()">Aceptar</button>
   </div>
 </div>
 <script>
+  const form = document.getElementById('formRegistro');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // ← Detiene el envío normal
+
+    const datos = new FormData(form);
+
+    fetch('../php/guardar.php', {
+      method: 'POST',
+      body: datos
+    })
+    .then(res => res.text())
+    .then(texto => {
+      console.log('Respuesta del servidor:', texto); // Para depurar
+      if (texto.includes("¡OK!")) {
+        mostrarModal();
+      } else {
+        alert(texto);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Hubo un error al enviar el formulario.');
+    });
+  });
+
   function mostrarModal() {
     document.getElementById("modalExito").style.display = "flex";
   }
 
   function irALogin() {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
   }
 </script>
+
+
+
 </body>
 </html>
