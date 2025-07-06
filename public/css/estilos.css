@@ -17,26 +17,41 @@
     min-height: 100vh;
     flex-wrap: wrap;
   }
-  
-  /* Lado izquierdo */
   .lado-izquierdo {
-    flex: 1.5;
-    background: url('/public/Imagenes/Fondo.jpg') center/cover no-repeat;
-    color: #fff;
-    padding: 20px 40px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    position: relative;
-    min-height: 400px;
-  }
+  flex: 1.5;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 40px;
+  overflow: hidden;
+  min-height: 100vh;
+   }
   
   .logo {
     width: 100px;
     align-self: flex-start;
     margin-top: 10px;
   }
-  
+  .fondo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+.lado-izquierdo {
+  flex: 1.5;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 40px;
+  overflow: hidden;
+  min-height: 100vh;
+}
   .texto-bienvenida {
     max-width: 400px;
     background-color: rgba(0, 0, 0, 0.5);
