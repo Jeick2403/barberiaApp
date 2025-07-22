@@ -43,3 +43,4 @@ $_SESSION['usuario_email']  = $user['nombre_usuario'];
 // 4. Devolver respuesta simple para JS
 echo "OK";
 exit;
+?>
