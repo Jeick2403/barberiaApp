@@ -1,120 +1,166 @@
 <?php
-
+// Configuración de cabeceras para JSON y CORS
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
+// Incluir la conexión a la base de datos
 include("conexion.php");
 
+// Responder OPTIONS para CORS y salir
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $resultado = $conn->query("SELECT * FROM usuarios");
-
-    $usuarios = [];
-    while ($fila = $resultado->fetch_assoc()) {
-        $usuarios[] = $fila;
-    }
-
-    echo json_encode($usuarios);
+// Función auxiliar para responder y terminar la ejecución
+function responder($success, $message = '', $data = []) {
+    echo json_encode(array_merge(
+        ['success' => $success, 'message' => $message],
+        $data
+    ));
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = json_decode(file_get_contents("php://input"), true);
+// Habilitar excepciones en errores de MySQLi
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-    if (!$input) {
-        echo json_encode(["success" => false, "message" => "Datos JSON no válidos"]);
-        exit();
-    }
+// Determinar qué acción ejecutar según el método HTTP
+switch ($_SERVER['REQUEST_METHOD']) {
+    case 'GET':
+        // Obtener todos los usuarios
+        $sql = "SELECT id_usuario, nombre_completo, nombre_usuario, id_rol, genero, tipo_documento, numero_documento FROM usuarios";
+        $resultado = $conn->query($sql);
 
-    $nombre = $input['nombre'] ?? '';
-    $correo = $input['correo'] ?? '';
-    $genero = $input['genero'] ?? '';
-    $tipo_documento = $input['tipo_documento'] ?? '';
-    $numero_documento = $input['numero_documento'] ?? '';
-    $rol = $input['rol'] ?? null;
+        $usuarios = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            // Mapear nombres de campos para el frontend
+            $usuarios[] = [
+                'id'               => $fila['id_usuario'],
+                'nombre'           => $fila['nombre_completo'],
+                'correo'           => $fila['nombre_usuario'],
+                'rol'              => $fila['id_rol'],
+                'genero'           => $fila['genero'],
+                'tipo_documento'   => $fila['tipo_documento'],
+                'numero_documento' => $fila['numero_documento']
+            ];
+        }
 
-    if (!$nombre || !$correo || !$rol) {
-        echo json_encode(["success" => false, "message" => "Faltan campos requeridos"]);
-        exit();
-    }
+        echo json_encode($usuarios);
+        break;
 
-    $sql = "INSERT INTO usuarios (nombre_completo, nombre_usuario, genero, tipo_documento, numero_documento, id_rol) 
-            VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssi", $nombre, $correo, $genero, $tipo_documento, $numero_documento, $rol);
+    case 'POST':
+        // Crear un nuevo usuario
+        $input = json_decode(file_get_contents("php://input"), true);
+        if (!$input) {
+            responder(false, "Datos JSON no válidos");
+        }
 
-    if ($stmt->execute()) {
+        // Campos requeridos
+        $nombre          = $input['nombre']          ?? '';
+        $correo          = $input['correo']          ?? '';
+        $genero          = $input['genero']          ?? '';
+        $tipo_documento  = $input['tipo_documento']  ?? '';
+        $numero_documento= $input['numero_documento']?? '';
+        $rol             = intval($input['rol']      ?? 0);
+
+        if (!$nombre || !$correo || !$rol) {
+            responder(false, "Faltan campos requeridos");
+        }
+
+        $sql = "INSERT INTO usuarios 
+                (nombre_completo, nombre_usuario, genero, tipo_documento, numero_documento, id_rol)
+                VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            "sssssi",
+            $nombre,
+            $correo,
+            $genero,
+            $tipo_documento,
+            $numero_documento,
+            $rol
+        );
+        $stmt->execute();
+
         $id_nuevo = $stmt->insert_id;
-        $usuario = [
-            "id" => $id_nuevo,
-            "nombre" => $nombre,
-            "correo" => $correo,
-            "genero" => $genero,
-            "tipo_documento" => $tipo_documento,
-            "numero_documento" => $numero_documento,
-            "rol" => $rol
-        ];
-        echo json_encode(["success" => true, "usuario" => $usuario]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Error al insertar en la base de datos"]);
-    }
+        responder(true, "Usuario creado", [
+            'usuario' => [
+                'id'               => $id_nuevo,
+                'nombre'           => $nombre,
+                'correo'           => $correo,
+                'genero'           => $genero,
+                'tipo_documento'   => $tipo_documento,
+                'numero_documento' => $numero_documento,
+                'rol'              => $rol
+            ]
+        ]);
+        break;
 
-    exit();
-}
+    case 'PUT':
+        // Actualizar un usuario existente
+        $input = json_decode(file_get_contents("php://input"), true);
+        $id              = intval($input['id']              ?? 0);
+        $nombre          = $input['nombre']                 ?? '';
+        $correo          = $input['correo']                 ?? '';
+        $genero          = $input['genero']                 ?? '';
+        $tipo_documento  = $input['tipo_documento']         ?? '';
+        $numero_documento= $input['numero_documento']       ?? '';
+        $rol             = intval($input['rol']             ?? 0);
 
-if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-    $input = json_decode(file_get_contents("php://input"), true);
+        if (!$id || !$nombre || !$correo || !$rol) {
+            responder(false, "Faltan campos requeridos");
+        }
 
-    $id = $input['id'] ?? null;
-    $nombre = $input['nombre'] ?? '';
-    $correo = $input['correo'] ?? '';
-    $genero = $input['genero'] ?? '';
-    $tipo_documento = $input['tipo_documento'] ?? '';
-    $numero_documento = $input['numero_documento'] ?? '';
-    $rol = $input['rol'] ?? null;
+        $sql = "UPDATE usuarios SET 
+                    nombre_completo = ?, 
+                    nombre_usuario  = ?, 
+                    genero          = ?, 
+                    tipo_documento  = ?, 
+                    numero_documento= ?, 
+                    id_rol          = ?
+                WHERE id_usuario   = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            "ssssssi",
+            $nombre,
+            $correo,
+            $genero,
+            $tipo_documento,
+            $numero_documento,
+            $rol,
+            $id
+        );
+        $stmt->execute();
 
-    if (!$id || !$nombre || !$correo || !$rol) {
-        echo json_encode(["success" => false, "message" => "Faltan campos requeridos"]);
-        exit();
-    }
+        if ($stmt->affected_rows > 0) {
+            responder(true, "Usuario actualizado");
+        } else {
+            responder(false, "No se actualizó ningún registro");
+        }
+        break;
 
-    $sql = "UPDATE usuarios SET nombre_completo=?, nombre_usuario=?, genero=?, tipo_documento=?, numero_documento=?, id_rol=? WHERE id_usuario=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssi", $nombre, $correo, $genero, $tipo_documento, $numero_documento, $rol, $id);
+    case 'DELETE':
+        // Eliminar un usuario por su ID
+        $input = json_decode(file_get_contents("php://input"), true);
+        $id    = intval($input['id'] ?? 0);
+        if (!$id) {
+            responder(false, "ID inválido o faltante");
+        }
 
-    if ($stmt->execute()) {
-        echo json_encode(["success" => true]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Error al actualizar"]);
-    }
+        $stmt = $conn->prepare("DELETE FROM usuarios WHERE id_usuario = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
 
-    exit();
-}
+        if ($stmt->affected_rows > 0) {
+            responder(true, "Usuario eliminado");
+        } else {
+            responder(false, "No se encontró usuario con ese ID");
+        }
+        break;
 
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    $input = json_decode(file_get_contents("php://input"), true);
-    $id = $input['id'] ?? null;
-
-    if (!$id) {
-        echo json_encode(["success" => false, "message" => "ID faltante"]);
-        exit();
-    }
-
-    $sql = "DELETE FROM usuarios WHERE id_usuario = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-
-    if ($stmt->execute()) {
-        echo json_encode(["success" => true]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Error al eliminar usuario"]);
-    }
-
-    exit();
+    default:
+        // Método no soportado
+        responder(false, "Método no soportado: " . $_SERVER['REQUEST_METHOD']);
 }
