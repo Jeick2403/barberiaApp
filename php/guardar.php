@@ -1,4 +1,5 @@
 <?php
+//Trasnferiencia
 session_start();
 require __DIR__ . '/../config/config.php';//Cargar la configuración de la base de datos
 

@@ -1,4 +1,6 @@
 <?php
+
+//Trasnferiencia
 // config/config.php
 
 $host = '127.0.0.1';         // o 'localhost'
