@@ -137,6 +137,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         if ($stmt->affected_rows > 0) {
             responder(true, "Usuario actualizado");
+            echo json_encode(["success" => true]);// Respuesta exitosa
         } else {
             responder(false, "No se actualizó ningún registro");
         }
